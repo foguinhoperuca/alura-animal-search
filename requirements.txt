@@ -1,0 +1,10 @@
+Django
+python-dotenv
+termcolor
+pytest
+pytest-cov
+psycopg2
+psycopg2-binary
+pylint-django
+Pillow
+selenium
