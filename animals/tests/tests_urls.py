@@ -1,0 +1,17 @@
+from django.test import TestCase, RequestFactory
+from django.urls import reverse
+from animals.views import index
+
+
+class AnimalsURLSTestCase(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_route_view_index(self):
+        request = self.factory.get('/')
+        response = index(request)
+        self.assertEqual(response.status_code, 200)
+
+    # def test_route_view_with_reverse(self):
+    #     root = reverse('/')
+    #     self.assertEqual(root, index)
