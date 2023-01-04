@@ -9,9 +9,6 @@ class AnimalsURLSTestCase(TestCase):
 
     def test_route_view_index(self):
         request = self.factory.get('/')
-        response = index(request)
-        self.assertEqual(response.status_code, 200)
-
-    # def test_route_view_with_reverse(self):
-    #     root = reverse('/')
-    #     self.assertEqual(root, index)
+        with self.assertTemplateUsed('animals/index.html'):
+            response = index(request)
+            self.assertEqual(response.status_code, 200)
