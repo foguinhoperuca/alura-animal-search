@@ -1,0 +1,59 @@
+{% load static %}
+<html lang="en">
+    <head>a
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" media="screen" />
+      <title>Search Animal</title>
+    </head>
+    <body>
+    <nav class="navbar">
+      <a class="navbar__link" href="#">Animal Search</a>
+    </nav>
+    <section class="search-section">
+        <h1 class="title">Search an animal and find out <span class="title__detail">4 facts</span> about him.</h1>
+        <form class="form">
+          <input class="form__input" type="text" class="form-control" id="search" name="search" placeholder="Eg.: lion, bear, dog, cat, etc..." aria-label="Search Animal"/>
+          <button type="submit" class="button">Search</button>
+        </form>
+    </section>
+    {% for feat in feats%}
+    <section class="results-section">
+      <ul class="results">
+        <li class="result">
+          <h3 class="result-description">
+            Name
+          </h3>
+          <h2 class="result-title">
+            {{feat.name}}
+          </h2>
+        </li>
+        <li class="result">
+          <h2 class="result-description">
+            Predator
+          </h2>
+          <h3 class="result-description">
+            {{feat.predator}}
+          </h3>
+        </li>
+        <li class="result">
+          <h2 class="result-description">
+            Poisonous
+          </h2>
+          <h3 class="result-description">
+            {{feat.poisonous}}
+          </h3>
+        </li>
+        <li class="result">
+          <h2 class="result-description">
+            Domestic
+          </h2>
+          <h3 class="result-description">
+            {{feat.domestic}}
+          </h3>
+        </li>
+      </ul>
+    </section>
+    {% endfor %}
+    </body>
+</html>

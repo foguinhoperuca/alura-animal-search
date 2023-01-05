@@ -1,12 +1,16 @@
 from django.test import LiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
 
 
 class AnimalsTestCase(LiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome('C:\\Program Files (x86)\\Google\\Chrome\\chrome_webdriver\\chromedriver.exe')
+        chrome_options = Options()
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        self.browser = webdriver.Chrome('C:\\Program Files (x86)\\Google\\Chrome\\chrome_webdriver\\chromedriver.exe',
+                                        options=chrome_options)
 
     def tearDown(self):
         self.browser.quit()
@@ -24,15 +28,17 @@ class AnimalsTestCase(LiveServerTestCase):
         self.assertEqual('Animal Search', brand_element.text)
 
         # Also he sees a field to search for animals by name
-        search_animal_input = self.browser.find_element(By.CSS_SELECTOR, 'input#search-animal')
+        search_animal_input = self.browser.find_element(By.CSS_SELECTOR, 'input#search')
         self.assertEqual(search_animal_input.get_attribute('placeholder'), 'Eg.: lion, bear, dog, cat, etc...')
-        sleep(5)
 
         # So, he searches for Lion and click in button "search"
         search_animal_input.send_keys('Lion')
         self.browser.find_element(By.CSS_SELECTOR, 'form button').click()
+        sleep(200)
 
-        # # Then, the site show 4 features of animal
+        # Then, the site show 4 features of animal
         feat = self.browser.find_element(By.CSS_SELECTOR, '.result-description')
+        sleep(10)
+        self.assertGreater((len(feat), 3))
 
         # And, of course, Vini gave up with Lion
