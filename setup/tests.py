@@ -1,8 +1,9 @@
+from time import sleep
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from time import sleep
+from animals.models import Animal
 
 
 class AnimalsTestCase(LiveServerTestCase):
@@ -11,6 +12,7 @@ class AnimalsTestCase(LiveServerTestCase):
         chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
         self.browser = webdriver.Chrome('C:\\Program Files (x86)\\Google\\Chrome\\chrome_webdriver\\chromedriver.exe',
                                         options=chrome_options)
+        self.animal = Animal.objects.create(name='Lion', predator='Yes', poisonous='No', domestic='No')
 
     def tearDown(self):
         self.browser.quit()
@@ -34,7 +36,8 @@ class AnimalsTestCase(LiveServerTestCase):
         # So, he searches for Lion and click in button "search"
         search_animal_input.send_keys('Lion')
         self.browser.find_element(By.CSS_SELECTOR, 'form button').click()
-        sleep(200)
+        # sleep(200)
+        sleep(5)
 
         # Then, the site show 4 features of animal
         feat = self.browser.find_element(By.CSS_SELECTOR, '.result-description')

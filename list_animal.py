@@ -1,5 +1,7 @@
-# import os, django
-# from animals.models import Animal
+import os, django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'setup.settings')
+django.setup()
+from animals.models import Animal
 
 list_animals = [
     {'name': 'urso', 'predator': 'Yes', 'poisonous': 'No', 'domestic': 'No'},
@@ -74,12 +76,6 @@ list_animals = [
     {'name': 'Lion', 'predator': 'Yes', 'poisonous': 'No', 'domestic': 'No'}
 ]
 
-import os, django
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'setup.settings')
-django.setup()
-
-from animals.models import Animal
 
 def generate_animals():
     for animal in list_animals:
